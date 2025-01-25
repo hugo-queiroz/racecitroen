@@ -8,6 +8,7 @@
     </footer>
 
     <!-- js -->
+    <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/premios.js"></script>
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/pills.js"></script>
     <script src="<?php echo get_stylesheet_directory_uri(); ?>/js/menu.js"></script>
 

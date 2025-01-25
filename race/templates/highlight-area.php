@@ -1,6 +1,6 @@
 <!-- highlight area -->
 <section class="highlight-area">
-  <div class="items">
+  <div class="items container-wrapper">
     <div class="group">
       <a href="#">
         <div class="item">
@@ -11,6 +11,7 @@
           <figcaption>Consultores de Vendas</figcaption>
         </div>
       </a>
+      <div class="divisor"></div>
       <a href="#">
         <div class="item">
           <figure>
@@ -20,6 +21,7 @@
           <figcaption>Marketing/CRM</figcaption>
         </div>
       </a>
+      <div class="divisor"></div>
       <a href="#">
         <div class="item">
           <figure>

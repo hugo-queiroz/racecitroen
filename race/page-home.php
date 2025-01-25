@@ -24,93 +24,136 @@
                     <div class="pill" data-target="premios-junho">Junho</div>
                 </div>
 
+                <!-- janeiro -->
                 <div class="content" id="janeiro">
                     <div class="items">
+                        <!-- custom post type -->
+                        <?php
+                            $args = array (
+                                'post_type' => 'premios',
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'premios-mes',
+                                        'field' => 'slug', // 'slug' | 'term_id'
+                                        'terms' => 'janeiro',
+                                    ),
+                                ),
+                                'orderby' => 'date',
+                                'order' => 'ASC',
+                                'posts_per_page' => -1,
+                            );
+                            $the_query = new WP_Query ( $args );
+                        ?>
+                        <?php if ( have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+
                         <div class="item">
                             <div class="">
-                                <p>Consultor(a) de Vendas</p>
+                                <p class="premio-item-title"><?php the_field('premios-funcao'); ?></p>
                                 <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-divisor.svg">
-                                <figcaption>Cervejeira Consul</figcaption>
+                                <figcaption><?php the_title()?></figcaption>
                             </div>
                             <figure>
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-cervejeira.png" alt="Imagem de cervejeira">
+                                <?php the_post_thumbnail()?>
                             </figure>
                         </div>
-                        <div class="item">
-                            <div class="">
-                                <p>Gerente de Vendas</p>
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-divisor.svg">
-                                <figcaption>TV tudo em 1</figcaption>
-                            </div>
-                            <figure>
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-tv.png" alt="Imagem de tv"  id="tv">
-                            </figure>
-                        </div>
-                        <div class="item">
-                            <div class="">
-                                <p>MKT/CRM e Qualidade</p>
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-divisor.svg">
-                                <figcaption>Music Frame Samsung</figcaption>
-                            </div>
-                            <figure>
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-music.png" alt="Imagem Music Frame Samsung">
-                            </figure>
-                        </div>
+
+                        <?php endwhile; else: endif; ?>
+                        <!-- fim do custom post type -->
                     </div>
                 </div>
-                <div class="content hidden" id="premios-fevereiro">Conteúdo Fevereiro</div>
+
+                <!-- fevereiro -->
+                <div class="content hidden" id="premios-fevereiro">
+                    <div class="items">
+                        <!-- custom post type -->
+                        <?php
+                            $args = array (
+                                'post_type' => 'premios',
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'premios-mes',
+                                        'field' => 'slug', // 'slug' | 'term_id'
+                                        'terms' => 'fevereiro',
+                                    ),
+                                ),
+                                'orderby' => 'date',
+                                'order' => 'ASC',
+                                'posts_per_page' => -1,
+                            );
+                            $the_query = new WP_Query ( $args );
+                        ?>
+                        <?php if ( have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+
+                        <div class="item">
+                            <div class="">
+                                <p class="premio-item-title"><?php the_field('premios-funcao'); ?></p>
+                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/premios-divisor.svg">
+                                <figcaption><?php the_title()?></figcaption>
+                            </div>
+                            <figure>
+                                <?php the_post_thumbnail()?>
+                            </figure>
+                        </div>
+
+                        <?php endwhile; else: endif; ?>
+                        <!-- fim do custom post type -->
+                    </div>
+                </div>
+
+                <!-- março -->
                 <div class="content hidden" id="premios-marco">Conteúdo Março</div>
+                <!-- abril -->
                 <div class="content hidden" id="premios-abril">Conteúdo Abril</div>
+                <!-- maio -->
                 <div class="content hidden" id="premios-maio">Conteúdo Maio</div>
+                <!-- junho -->
                 <div class="content hidden" id="premios-junho">Conteúdo Junho</div>
             </div>
             <!-- --- -->
 
         </div>
+        <?php wp_reset_postdata(); ?>
     </section>
 
     <!-- placar -->
     <section class="placar">
         <div class="container">
-            <h2 class="section-title">Placar</h2>
+            <header>
+                <h2 class="section-title">Placar</h2>
+            </header>
             
+            <!-- pills -->
+            
+
         </div>
     </section>
 
     <!-- fun zone -->
     <section class="funzone">
         <div class="container">
-            <h2 class="section-title">Fun Zone</h2>
-            <p class="section-text">Leve a Race Citroën sempre com você!</p>
+            <h2 class="section-title"><?php the_field('funzone-title'); ?></h2>
+            <p class="section-text"><?php the_field('funzone-text'); ?></p>
             <div class="items">
-                <div class="item">
-                    <a href="#">
-                        <p>Backgrounds</p>
+                <!-- loop -->
+                <?php if(have_rows('funzone-item')): while(have_rows('funzone-item')) : the_row(); ?>
+                    <div class="item">
+                        <a href="<?php the_sub_field('funzone-item-link'); ?>">
+                        <p><?php the_sub_field('funzone-item-title'); ?></p>
                         <div>
-                            <span>Desktop</span>
+                            <span><?php the_sub_field('funzone-item-text'); ?></span>
                             <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/icons/download.png" alt="Ícone de download">
                         </div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/desktop.png" alt="Imagem de um notebook">
+                        <img src="<?php the_sub_field('funzone-item-img'); ?>" alt="Imagem <?php the_sub_field('funzone-item-text'); ?>">
                     </a>
-                </div>
-                <div class="item">
-                    <a href="#">
-                        <p>Backgrounds</p>
-                        <div>
-                            <span>Mobile</span>
-                            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/icons/download.png" alt="Ícone de download">
-                        </div>
-                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/mobile.png" alt="Imagem de um celular">
-                    </a>
-                </div>
+                    </div>
+                <?php endwhile; else : endif; ?>
+                <!-- fim do loop -->
             </div>
         </div>
     </section>
 
     <!-- fullscreen video section -->
-    <section class="fullscreen-video">
-        
-    </section>
+    <section class="fullscreen-video"></section>
 
     <!-- footer -->
     <?php require 'footer.php' ?>

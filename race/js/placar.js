@@ -4,17 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
-
+      // Remove 'active' de todos os botões
       buttons.forEach(btn => btn.classList.remove('active'));
       button.classList.add('active');
 
-      panes.forEach(pane => pane.classList.remove('active'));
-      
+      // Esconde todas as abas
+      panes.forEach(pane => {
+        pane.classList.remove('active');
+        pane.style.display = 'none'; // Esconde no fluxo
+      });
+
+      // Mostra a aba alvo
       const targetId = button.getAttribute('data-target');
       const targetPane = document.getElementById(targetId);
 
       if (targetPane) {
-        targetPane.classList.add('active');
+        targetPane.style.display = 'flex'; // Mostra no fluxo
+        requestAnimationFrame(() => {
+          targetPane.classList.add('active'); // Adiciona animação
+        });
       }
     });
   });

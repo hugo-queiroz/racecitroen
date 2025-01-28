@@ -14,15 +14,16 @@
   font-family: "Outfit", serif;
   -webkit-font-smoothing: antialiased;
 }
-body {
-  overflow-x: hidden;
+html, body {
+  overflow-x: hidden !important;
+  position: relative;
 }
 a {
   text-decoration: none;
   color: unset;
 }
 .container {
-  max-width: 1200px;
+  width: 1200px;
   margin: auto;
   padding: 84px 0;
 }
@@ -314,7 +315,6 @@ a {
 /* placar */
 .placar {
   background: /* url("../assets/images/placar-bg.png"), */ var(--color-support-dark);
-  background-size: auto;
   .section-title {
     color: var(--color-support-light);
   }
@@ -328,7 +328,7 @@ a {
       margin-right: 20px;
       .nav-button {
         color: var(--color-support-light);
-        transition: .2s;
+        transition: 0.2s;
         cursor: pointer;
         background: transparent;
         border: none;
@@ -351,59 +351,59 @@ a {
           width: 70%;
         }
       }
-    }
+    } 
     .tab-content {
       width: 100%;
       position: relative;
       .tab-pane {
-        position: absolute;
-        top: 0;
-        left: 0;
+        position: relative;
         width: 100%;
-        opacity: 0;
+        opacity: 0; 
         transform: translateY(10px);
         transition: opacity 0.3s ease, transform 0.3s ease;
         color: #fff;
         padding: 58px;
-        display: flex;
-        gap: 32px;
+        display: none;
+        gap: 32px; 
         &.active {
+          display: flex;
           opacity: 1;
           transform: translateY(0);
           z-index: 1;
-        }
+        } 
         .info-wrapper {
-          width: 20%;
+          width: 20%; 
           .pic {
             .place {
               font-weight: bold;
               font-style: italic;
               font-size: 112px;
               position: absolute;
-              left: 0px;
+              left: 0;
               top: 8px;
               letter-spacing: -5px;
             }
-          }
+          } 
           .info {
             display: flex;
             flex-direction: column;
             gap: 4px;
-            font-style: italic;
+            font-style: italic; 
             #name {
               font-weight: bold;
               margin: 4px 0 0 0;
               text-transform: uppercase;
-            }
+            } 
             span {
               font-weight: 100;
               font-size: 14px;
-            }
+            } 
             #points {
               font-weight: bold;
             }
           }
         }
+  
         /* ranking */
         .ranking-wrapper {
           width: 80%;
@@ -423,13 +423,16 @@ a {
                 .place {
                   font-weight: bold;
                 }
+                img {
+                  width: 32px;
+                }
               }
             }
           }
         }
       }
     }
-  }
+  }    
 }
 
 /* fun zone */
@@ -482,8 +485,259 @@ a {
 /* footer */
 footer {
   background: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .wrapper {
     display: flex;
     justify-content: center;
   }
+}
+
+/* responsive */
+@media (max-width: 1340px) {
+  .container {
+    max-width: 1080px;
+  }
+  /* premios */
+  .premios {
+    /* pills */
+    .pills {
+      .pills-container {
+        .pill {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+  /* placar */
+  .placar {
+    /* pills */
+    .placar-pills {
+      flex-direction: column;
+      .nav {
+        flex-direction: row;
+        gap: 0;
+        margin: 48px -100px 0 0;
+        justify-content: center;
+        .nav-button {
+          img {
+            left: -50px;
+            width: 180px;
+          }
+        }
+      }
+      .tab-content {
+        .tab-pane {
+          .info-wrapper {
+            width: 15%;
+          }
+          /* ranking */
+          .ranking-wrapper {
+            width: 70%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) { 
+  .container {
+    max-width: 1000px;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    max-width: 940px;
+  }
+}
+@media (max-width: 960px) {
+  .container {
+    max-width: 840px;
+  }
+  .header {
+    .container {
+      #wrapper {
+        top: 1%;
+        left: 5%;
+        .menu_wrapper {
+          margin: 0 0 12px 0;
+        }
+      }
+    }
+  }
+  .banner {
+    background-size: cover;
+    background-position: 50%;
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 221px 0 44px 0;
+      background: linear-gradient(360deg, #00000060, transparent);
+    }
+    h1 {
+      padding: 0;
+      color: var(--color-support-light);
+      width: 50%;
+      background-size: cover;
+    }
+  }
+  .premios {
+    .pills {
+      flex-direction: column;
+      margin: 48px 0 0 0;
+      .pills-container {
+        flex-direction: row;
+        gap: 10px;
+        .pill {
+          font-size: 18px;
+        }
+        img {
+          display: none;
+        }
+      }
+    }
+  }
+  .placar {
+    .placar-pills {
+      margin: 48px 0 0 0;
+      .nav {
+        overflow-x: scroll;
+        width: 720px;
+        margin: auto;
+        gap: 50px;
+        .nav-button {
+          &:first-child {
+            margin-left: 250px;
+          }
+          p {
+            width: 90%;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 850px) {
+  .container {
+    max-width: 750px;
+  }
+  .premios {
+    .pills {
+      .content {
+        .items {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+  /* highlight banner footer */
+  .highlight-area {
+    .items {
+      .group {
+        align-items: flex-start;
+        width: 100%;
+        padding: 23px;
+        .divisor {
+          width: 3px;
+        }
+      }
+      .single {
+        align-items: center;
+      }
+      .item {
+        figcaption {
+          text-wrap: wrap;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .placar {
+    .placar-pills {
+      .nav {
+        overflow-x: scroll;
+        width: 650px;
+        margin: auto;
+        gap: 50px;
+        .nav-button {
+          &:first-child {
+            margin-left: 330px;
+          }
+          p {
+            width: 90%;
+          }
+        }
+      }
+      .tab-content {
+        .tab-pane {
+          flex-direction: column;
+          .ranking-wrapper {
+            width: 85%;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .highlight-area {
+    .items {
+      .group {
+        gap: 32px;
+      }
+      .single {
+        display: none;
+      }
+    }
+  }
+  .placar {
+    .placar-pills {
+      .tab-content {
+        .tab-pane {
+          flex-direction: column;
+          .ranking-wrapper {
+            width: 62%;
+            .ranking {
+              .item {
+                flex-direction: column;
+                padding: 6px 6px 10px 2px;
+                div {
+                  &:nth-child(2), &:nth-child(3) {
+                    img {
+                      display: none;
+                    }
+                    p {
+                      margin: 0 0 0 70px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          .info-wrapper {
+            width: 62%;
+            margin: 0 0 0 150px;
+            .pic {
+              position: relative;
+              .place {
+                left: -40px;
+                top: -56px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 480px) {
+  
 }

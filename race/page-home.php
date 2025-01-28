@@ -181,7 +181,7 @@
                     <div class="tab-pane" id="tab-item3">item3 will appear here.</div>
                     <div class="tab-pane" id="tab-item4">item4 can be configured here.</div>
                 </div>
-            </div>        
+            </div> 
         </div>
     </section>
 

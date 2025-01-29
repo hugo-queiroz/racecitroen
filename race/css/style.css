@@ -708,6 +708,7 @@ footer {
           flex-direction: column;
           padding: 16px 16px 16px 0;
           width: 100vw;
+          background: transparent;
           #mob-wrapper {
             display: flex;
             flex-direction: column;
@@ -734,7 +735,7 @@ footer {
             }
             .divisor {
               height: 1px;
-              width: 30vw;
+              width: 40vw;
               margin-right: auto;
               background: var(--color-primary);
               margin-left: 30px;
@@ -798,7 +799,7 @@ footer {
   .premios {
     .arrows {
       right: -6vw;
-      bottom: 120vh;
+      bottom: 38vh;
     }
     .section-title {
       width: 100vw;

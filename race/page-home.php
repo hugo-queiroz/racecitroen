@@ -10,6 +10,7 @@
 
     <!-- premios -->
     <section class="premios">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-arrows.png" class="arrows">
         <div class="container">
             <h2 class="section-title">Prêmios</h2>
 
@@ -26,7 +27,7 @@
                 </div>
 
                 <!-- janeiro -->
-                <div class="content" id="premios-janeiro">
+                <div class="content visible hidden" id="premios-janeiro">
                     <div class="items">
                         <!-- custom post type -->
                         <?php
@@ -188,8 +189,10 @@
     <!-- fun zone -->
     <section class="funzone">
         <div class="container">
-            <h2 class="section-title"><?php the_field('funzone-title'); ?></h2>
-            <p class="section-text"><?php the_field('funzone-text'); ?></p>
+            <header>
+                <h2 class="section-title"><?php the_field('funzone-title'); ?></h2>
+                <p class="section-text"><?php the_field('funzone-text'); ?></p>
+            </header>
             <div class="items">
                 <!-- loop -->
                 <?php if(have_rows('funzone-item')): while(have_rows('funzone-item')) : the_row(); ?>

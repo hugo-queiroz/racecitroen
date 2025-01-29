@@ -4,11 +4,14 @@ const elements = {
   line2: document.querySelector('#line2'),
   line3: document.querySelector('#line3'),
   links: document.querySelector('.links'),
-  menu_wrapper: document.querySelector('.menu_wrapper')
+  wrapper: document.querySelector('.header #wrapper'),
+  menu_wrapper: document.querySelector('.menu_wrapper'),
+  mob_wrapper: document.querySelector('#mob-wrapper'),
+  logo: document.querySelector('.logo')
 };
 
 elements.menu.addEventListener('click', () => {
-  ['line1', 'line2', 'line3', 'links', 'menu_wrapper'].forEach(key => {
+  ['line1', 'line2', 'line3', 'links', 'wrapper', 'mob_wrapper', 'menu_wrapper, logo'].forEach(key => {
     elements[key].classList.toggle(`${key}-active`);
   });
 

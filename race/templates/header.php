@@ -4,10 +4,17 @@
     <div id="wrapper">
       <!-- menu -->
       <div class="menu_wrapper">
-        <div class="hamburger-menu">
-          <div class="line" id="line1"></div>
-          <div class="line" id="line2"></div>
-          <div class="line" id="line3"></div>
+        <div id="mob-wrapper">
+          <div class="hamburger-menu">
+            <div class="line" id="line1"></div>
+            <div class="line" id="line2"></div>
+            <div class="line" id="line3"></div>
+          </div>
+          <div class="logo-top">
+            <a href="#">
+              <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logo.svg" alt="Logo Race Citroën">
+            </a>
+          </div>
         </div>
         <nav class="links">
             <a href="#premios">Prêmios</a>

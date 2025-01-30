@@ -9,7 +9,7 @@
     <?php require 'templates/banner.php' ?>
 
     <!-- premios -->
-    <section class="premios">
+    <section class="premios" id="premios">
         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-arrows.png" class="arrows">
         <div class="container">
             <h2 class="section-title">Prêmios</h2>
@@ -118,7 +118,7 @@
     </section>
 
     <!-- placar -->
-    <section class="placar">
+    <section class="placar" id="placar">
         <div class="container">
             <header>
                 <h2 class="section-title">Placar</h2>

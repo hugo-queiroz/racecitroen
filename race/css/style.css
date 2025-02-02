@@ -426,6 +426,11 @@ button {
               top: 8px;
               letter-spacing: -5px;
             }
+            img {
+              width: 117px;
+              height: 134px;
+              object-fit: cover;
+            }
           } 
           .info {
             display: flex;

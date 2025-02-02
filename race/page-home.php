@@ -98,7 +98,7 @@
                         </div>
 
                         <?php endwhile; else: endif; ?>
-                        <!-- fim do custom post type -->
+                        <!-- custom post type -->
                     </div>
                 </div>
 
@@ -129,61 +129,182 @@
                 <nav class="nav" id="nav-pills">
                     <button class="nav-button active" data-target="tab-item1">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-divisor.svg">
-                        <p>Consultor(a) de Vendas</p>
+                        <p><?php the_field('placar-item1'); ?></p>
                     </button>
                     <button class="nav-button" data-target="tab-item2">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-divisor.svg">
-                        <p>Gerente de Vendas</p>
+                        <p><?php the_field('placar-item2'); ?></p>
                     </button>
                     <button class="nav-button" data-target="tab-item3">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-divisor.svg">
-                        <p>Responsável de MKT/CRM</p>
+                        <p><?php the_field('placar-item3'); ?></p>
                     </button>
                     <button class="nav-button" data-target="tab-item4">
                         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-divisor.svg">
-                        <p>Responsável de Qualidade</p>
+                        <p><?php the_field('placar-item4'); ?></p>
                     </button>
                 </nav>
                 <div class="tab-content" id="tab-content">
-                    <div class="tab-pane active" id="tab-item1">
-                        <div class="info-wrapper">
-                            <div class="pic">
-                                <span class="place">1º</span>
-                                <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/placar-pic.png" alt="Imagem de Nome e Sobrenome">
-                            </div>
-                            <div class="info">
-                                <p id="name">Nome Sobrenome</p>
-                                <span>Concessionária</span>
-                                <p id="points">00 pontos</p>
-                            </div>
-                        </div>
-                        <div class="ranking-wrapper">
+                    
+                    <!-- item 1 -->
+                    <?php
+                    $args = array(
+                        'post_type' => 'placar',
+                        'orderby' => 'meta_value_num', 
+                        'meta_key' => 'placar-points',
+                        'order' => 'DESC', 
+                        'posts_per_page' => -1,
+                        'tax_query'      => array(
+                            array(
+                                'taxonomy' => 'placar-items',
+                                'field'    => 'slug',
+                                'terms'    => 'item1',
+                            ),
+                        ),
+                    );
 
-                            <div class="ranking">
-                                <div class="item">
-                                    <div>
-                                        <span class="place">2º</span>
-                                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/icons/placar-arrows.svg">
-                                        <p>Nome Sobrenome</p>
+                    $the_query = new WP_Query($args);
+                    ?>
+
+                    <?php if ($the_query->have_posts()): ?>
+                        <div class="tab-pane active" id="tab-item1">
+
+                            <?php $i = 0; ?>
+
+                            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+
+                            <!-- item destaque -->
+                            <?php if ($i === 0): ?>
+                            <div class="info-wrapper">
+                                <div class="pic">
+                                    <span class="place">1º</span>
+                                    <?php if (has_post_thumbnail()): ?>
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
+                                    <?php else: ?>
+                                        <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="info">
+                                    <p id="name"><?php the_title(); ?></p> 
+                                    <span><?php the_field('placar-info'); ?></span> 
+                                    <p id="points"><?php the_field('placar-points'); ?> pontos</p> 
+                                </div>
+                            </div>
+
+                            
+                            <div class="ranking-wrapper">
+                                <div class="ranking">
+                                    <!-- outros itens -->
+                                    <?php else: ?>
+                                    <div class="item">
+                                        <div>
+                                            <span class="place"><?php echo ($i + 1); ?>º</span>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                            <p><?php the_title(); ?></p>
+                                        </div>
+                                        <div>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                            <p><?php the_field('placar-info'); ?></p>
+                                        </div>
+                                        <div>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                            <p><?php the_field('placar-points'); ?> pontos</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/icons/placar-arrows.svg">
-                                        <p>Concessionária</p>
-                                    </div>
-                                    <div>
-                                        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/icons/placar-arrows.svg">
-                                        <p>00 pontos</p>
-                                    </div>
+                                    <?php endif; ?>
+                                    <!-- incremento -->
+                                    <?php $i++; ?>
+                                    <?php endwhile; ?>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="tab-item2">Item 2</div>
+                    <?php endif; ?>
+                    <?php wp_reset_postdata(); ?>
+
+                    <!-- item 2 -->
+                    <?php
+                    $args = array(
+                        'post_type' => 'placar',
+                        'orderby' => 'meta_value_num', 
+                        'meta_key' => 'placar-points',
+                        'order' => 'DESC', 
+                        'posts_per_page' => -1,
+                        'tax_query'      => array(
+                            array(
+                                'taxonomy' => 'placar-items',
+                                'field'    => 'slug',
+                                'terms'    => 'item2',
+                            ),
+                        ),
+                    );
+
+                    $the_query = new WP_Query($args);
+                    ?>
+
+                    <?php if ($the_query->have_posts()): ?>
+                        <div class="tab-pane" id="tab-item2">
+
+                            <?php $i = 0; ?>
+
+                            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+
+                            <!-- item destaque -->
+                            <?php if ($i === 0): ?>
+                            <div class="info-wrapper">
+                                <div class="pic">
+                                    <span class="place">1º</span>
+                                    <?php if (has_post_thumbnail()): ?>
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
+                                    <?php else: ?>
+                                        <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>">
+                                    <?php endif; ?>
+                                </div>
+                                <div class="info">
+                                    <p id="name"><?php the_title(); ?></p> 
+                                    <span><?php the_field('placar-info'); ?></span> 
+                                    <p id="points"><?php the_field('placar-points'); ?> pontos</p> 
+                                </div>
+                            </div>
+
+                            
+                            <div class="ranking-wrapper">
+                                <div class="ranking">
+                                    <!-- outros itens -->
+                                    <?php else: ?>
+                                    <div class="item">
+                                        <div>
+                                            <span class="place"><?php echo ($i + 1); ?>º</span>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                            <p><?php the_title(); ?></p>
+                                        </div>
+                                        <div>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                            <p><?php the_field('placar-info'); ?></p>
+                                        </div>
+                                        <div>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                            <p><?php the_field('placar-points'); ?> pontos</p>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
+                                    <!-- incremento -->
+                                    <?php $i++; ?>
+                                    <?php endwhile; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <?php wp_reset_postdata(); ?>
+
+                    <!-- item 3 -->
                     <div class="tab-pane" id="tab-item3">Item 3</div>
+
+                    <!-- item 4 -->
                     <div class="tab-pane" id="tab-item4">Item 4</div>
                 </div>
             </div> 
         </div>
+        <?php wp_reset_postdata(); ?>
     </section>
 
     <!-- fun zone -->

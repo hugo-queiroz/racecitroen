@@ -178,9 +178,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="tab-item2">Here is the item2 content.</div>
-                    <div class="tab-pane" id="tab-item3">item3 will appear here.</div>
-                    <div class="tab-pane" id="tab-item4">item4 can be configured here.</div>
+                    <div class="tab-pane" id="tab-item2">Item 2</div>
+                    <div class="tab-pane" id="tab-item3">Item 3</div>
+                    <div class="tab-pane" id="tab-item4">Item 4</div>
                 </div>
             </div> 
         </div>

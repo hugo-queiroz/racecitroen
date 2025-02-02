@@ -3,6 +3,14 @@
     <!-- header wp -->
     <?php get_header(); ?>
 
+    <!-- loader -->
+    <div id="loader">
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logo.svg">
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+    </div>
+
     <!-- header template -->
     <?php require 'templates/header.php' ?>
     <!-- banner template -->
@@ -333,7 +341,7 @@
         </div>
     </section>
 
-    <!-- fullscreen video section -->
+    <!-- fullscreen video -->
     <section class="fullscreen-video"></section>
 
     <!-- footer -->

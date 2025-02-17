@@ -462,12 +462,16 @@ button {
         padding: 58px;
         display: none;
         gap: 32px; 
+        flex-direction: column;
         &.active {
           display: flex;
           opacity: 1;
           transform: translateY(0);
           z-index: 1;
         } 
+        .content-wrapper {
+          display: flex;
+        }
         .info-wrapper {
           width: 20%; 
           .pic {
@@ -505,7 +509,63 @@ button {
             }
           }
         }
-  
+        /* search */
+        .search-wrapper {
+          .search-header {
+            display: flex;
+            align-items: center;
+            p {
+              text-transform: uppercase;
+              font-style: italic;
+              font-weight: 900;
+              font-size: 22px;
+              margin: 0 0 0 12px;
+            }
+          }
+          #search {
+            margin: 16px 0 0 0;
+            border: 1px solid var(--color-primary);
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: transparent;
+            font-size: 18px;
+            color: var(--color-support-light);
+            font-weight: 800;
+            outline: none;
+          }
+          #id {
+            display: none;
+          }
+          .result-wrapper {
+            flex-direction: column;
+            gap: 24px;
+            padding: 10px;
+            .placar-wrapper {
+              .result-content {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+                .profile-pic {
+                  width: 112px;
+                  object-fit: contain;
+                }
+                .group-wrapper {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 16px;
+                  .group {
+                    display: flex;
+                    gap: 12px;
+                    font-size: 18px;
+                    .place {
+                      font-weight: 900;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
         /* ranking */
         .ranking-wrapper {
           width: 80%;

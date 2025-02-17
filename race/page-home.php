@@ -2,7 +2,7 @@
 
     <!-- header wp -->
     <?php get_header(); ?>
-
+    
     <!-- loader -->
     <div id="loader">
         <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logo.svg">
@@ -131,7 +131,7 @@
             <header>
                 <h2 class="section-title">Placar</h2>
             </header>
-            
+
             <!-- pills -->
             <div class="placar-pills">
                 <nav class="nav" id="nav-pills">
@@ -183,51 +183,123 @@
 
                             <!-- item destaque -->
                             <?php if ($i === 0): ?>
-                            <div class="info-wrapper">
-                                <div class="pic">
-                                    <span class="place">1º</span>
-                                    <?php if (has_post_thumbnail()): ?>
-                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
-                                    <?php else: ?>
-                                        <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>">
-                                    <?php endif; ?>
+                            <div class="content-wrapper">
+                                <div class="info-wrapper">
+                                    <div class="pic">
+                                        <span class="place"><?php echo ($i + 1); ?>º</span>
+                                        <?php if (has_post_thumbnail()): ?>
+                                            <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
+                                        <?php else: ?>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>">
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="info">
+                                        <p id="name"><?php the_title(); ?></p> 
+                                        <span><?php the_field('placar-info'); ?></span>
+                                        <p id="points"><?php the_field('placar-points'); ?> pontos</p> 
+                                    </div>
                                 </div>
-                                <div class="info">
-                                    <p id="name"><?php the_title(); ?></p> 
-                                    <span><?php the_field('placar-info'); ?></span> 
-                                    <p id="points"><?php the_field('placar-points'); ?> pontos</p> 
+
+                                
+                                <div class="ranking-wrapper">
+                                    <div class="ranking">
+                                        <!-- outros itens -->
+                                        <?php else: ?>
+                                        <div class="item">
+                                            <div>
+                                                <span class="place"><?php echo ($i + 1); ?>º</span>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                <p><?php the_title(); ?></p>
+                                            </div>
+                                            <div>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                <p><?php the_field('placar-info'); ?></p>
+                                            </div>
+                                            <div>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                <p><?php the_field('placar-points'); ?> pontos</p>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <!-- incremento -->
+                                        <?php $i++; ?>
+                                        <?php endwhile; ?>
+                                    </div>
                                 </div>
                             </div>
 
-                            
-                            <div class="ranking-wrapper">
-                                <div class="ranking">
-                                    <!-- outros itens -->
+                    <!-- teste search -->
+                    <div class="search-wrapper">
+                        <div class="search-header">
+                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-bandeira.svg" alt="ícone de bandeira">
+                            <p>Qual é minha posição no placar?</p>
+                        </div>
+
+                        <input type="text" id="search" placeholder="000.000.000-00" onkeyup="searchFor()">
+                        <div class="result-wrapper">
+                            <?php $i = 0; ?>
+                            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+
+                                <div class="placar-wrapper" data-search="<?php the_field('placar-id'); ?>">
+                                    <?php if ($i === 0): ?>
+                                        <div class="result-content">
+                                            <?php if (has_post_thumbnail()): ?>
+                                                <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>" class="profile-pic">
+                                            <?php else: ?>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>" class="profile-pic">
+                                            <?php endif; ?>
+                                            <div class="group-wrapper">
+                                                <div class="group">
+                                                    <span class="place"><?php echo ($i + 1); ?>º</span>
+                                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                    <p><?php the_title(); ?></p>
+                                                </div>
+                                                <div class="group">
+                                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                    <span><?php the_field('placar-info'); ?></span> 
+                                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                    <p><?php the_field('placar-points'); ?> pontos</p>
+                                                    <span id="id"><?php the_field('placar-id'); ?></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <?php else: ?>
-                                    <div class="item">
-                                        <div>
-                                            <span class="place"><?php echo ($i + 1); ?>º</span>
-                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
-                                            <p><?php the_title(); ?></p>
+                                        <div class="result-content">
+                                            <?php if (has_post_thumbnail()): ?>
+                                                <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>" class="profile-pic">
+                                            <?php else: ?>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>" class="profile-pic">
+                                            <?php endif; ?>
+                                            <div class="group-wrapper">
+                                                <div class="group">
+                                                    <span class="place"><?php echo ($i + 1); ?>º</span>
+                                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                    <p><?php the_title(); ?></p>
+                                                </div>
+                                                <div class="group">
+                                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                    <span><?php the_field('placar-info'); ?></span> 
+                                                    <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                    <p><?php the_field('placar-points'); ?> pontos</p>
+                                                    <span id="id"><?php the_field('placar-id'); ?></span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
-                                            <p><?php the_field('placar-info'); ?></p>
-                                        </div>
-                                        <div>
-                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
-                                            <p><?php the_field('placar-points'); ?> pontos</p>
-                                        </div>
-                                    </div>
                                     <?php endif; ?>
-                                    <!-- incremento -->
-                                    <?php $i++; ?>
-                                    <?php endwhile; ?>
                                 </div>
-                            </div>
+                                <?php $i++; ?>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
+                    <!-- teste search -->
+
+
                         </div>
                     <?php endif; ?>
                     <?php wp_reset_postdata(); ?>
+                    <!-- item 1 -->
+
+                                        
 
                     <!-- item 2 -->
                     <?php
@@ -258,57 +330,62 @@
 
                             <!-- item destaque -->
                             <?php if ($i === 0): ?>
-                            <div class="info-wrapper">
-                                <div class="pic">
-                                    <span class="place">1º</span>
-                                    <?php if (has_post_thumbnail()): ?>
-                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
-                                    <?php else: ?>
-                                        <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>">
-                                    <?php endif; ?>
-                                </div>
-                                <div class="info">
-                                    <p id="name"><?php the_title(); ?></p> 
-                                    <span><?php the_field('placar-info'); ?></span> 
-                                    <p id="points"><?php the_field('placar-points'); ?> pontos</p> 
-                                </div>
-                            </div>
-
-                            
-                            <div class="ranking-wrapper">
-                                <div class="ranking">
-                                    <!-- outros itens -->
-                                    <?php else: ?>
-                                    <div class="item">
-                                        <div>
-                                            <span class="place"><?php echo ($i + 1); ?>º</span>
-                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
-                                            <p><?php the_title(); ?></p>
-                                        </div>
-                                        <div>
-                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
-                                            <p><?php the_field('placar-info'); ?></p>
-                                        </div>
-                                        <div>
-                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
-                                            <p><?php the_field('placar-points'); ?> pontos</p>
-                                        </div>
+                            <div class="content-wrapper">
+                                <div class="info-wrapper">
+                                    <div class="pic">
+                                        <span class="place">1º</span>
+                                        <?php if (has_post_thumbnail()): ?>
+                                            <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="<?php the_title(); ?>">
+                                        <?php else: ?>
+                                            <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/images/placar-pic.png" alt="<?php the_title(); ?>">
+                                        <?php endif; ?>
                                     </div>
-                                    <?php endif; ?>
-                                    <!-- incremento -->
-                                    <?php $i++; ?>
-                                    <?php endwhile; ?>
+                                    <div class="info">
+                                        <p id="name"><?php the_title(); ?></p> 
+                                        <span><?php the_field('placar-info'); ?></span> 
+                                        <p id="points"><?php the_field('placar-points'); ?> pontos</p> 
+                                    </div>
+                                </div>
+
+                                
+                                <div class="ranking-wrapper">
+                                    <div class="ranking">
+                                        <!-- outros itens -->
+                                        <?php else: ?>
+                                        <div class="item">
+                                            <div>
+                                                <span class="place"><?php echo ($i + 1); ?>º</span>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                <p><?php the_title(); ?></p>
+                                            </div>
+                                            <div>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                <p><?php the_field('placar-info'); ?></p>
+                                            </div>
+                                            <div>
+                                                <img src="<?php echo esc_url(get_stylesheet_directory_uri()); ?>/assets/icons/placar-arrows.svg">
+                                                <p><?php the_field('placar-points'); ?> pontos</p>
+                                            </div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <!-- incremento -->
+                                        <?php $i++; ?>
+                                        <?php endwhile; ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     <?php endif; ?>
                     <?php wp_reset_postdata(); ?>
+                    <!-- item 2 -->
 
                     <!-- item 3 -->
                     <div class="tab-pane" id="tab-item3">Item 3</div>
+                    <!-- item 3 -->
 
                     <!-- item 4 -->
                     <div class="tab-pane" id="tab-item4">Item 4</div>
+                    <!-- item 4 -->
                 </div>
             </div> 
         </div>
